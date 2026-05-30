@@ -9,7 +9,7 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-st.set_page_config(page_title="GenZCash Dashboard", page_icon="💸", layout="wide")
+st.set_page_config(page_title="SPENDIGO", page_icon="💸", layout="wide")
 
 st.markdown("""
 <style>
@@ -25,7 +25,7 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv('dashboard/genz_financial_dataset_v3.csv')
+    df = pd.read_csv('genz_financial_dataset_v3.csv')
     df['Date']         = pd.to_datetime(df['Date'])
     df['Year']         = df['Date'].dt.year
     df['Month']        = df['Date'].dt.month
@@ -394,12 +394,12 @@ with tab5:
         'Contoh'    : ['U001', 'boros', '2025-03-14', 'makan', '35000', 'Expense',
                        '2025', '3', '14', '1', '0', '1', '10.46']
     })
-    st.dataframe(dd, width="stretch", hide_index=True)
+    st.dataframe(dd, use_container_width=True, hide_index=True)
 
     st.markdown('<div class="section-title">Preview Data (500 baris pertama)</div>',
                 unsafe_allow_html=True)
-    st.dataframe(df_f.head(500), width="stretch")
+    st.dataframe(df_f.head(500), use_container_width=True)
 
     st.markdown('<div class="section-title">Statistik Deskriptif</div>', unsafe_allow_html=True)
     st.dataframe(df_f[['Amount', 'amount_log', 'Month', 'Day']].describe().round(2),
-                 width="stretch")
+                 use_container_width=True)
