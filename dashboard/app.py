@@ -302,8 +302,8 @@ with tab4:
                         'day_of_week', 'is_weekday', 'is_ramadan', 'is_harbolnas', 'User_Type_enc']
             X = df_model[FEATURES]; y = df_model['Category']
             X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-            with st.spinner("Melatih RandomForest (200 trees)..."):
-                rf = RandomForestClassifier(n_estimators=200, random_state=42, n_jobs=-1)
+            with st.spinner("Melatih RandomForest (20 trees)..."):
+                rf = RandomForestClassifier(n_estimators=20, max_depth=15, random_state=42, n_jobs=-1)
                 rf.fit(X_tr, y_tr)
                 y_pred = rf.predict(X_te)
                 acc = accuracy_score(y_te, y_pred)
@@ -394,12 +394,12 @@ with tab5:
         'Contoh'    : ['U001', 'boros', '2025-03-14', 'makan', '35000', 'Expense',
                        '2025', '3', '14', '1', '0', '1', '10.46']
     })
-    st.dataframe(dd, use_container_width=True, hide_index=True)
+    st.dataframe(dd, width="stretch", hide_index=True)
 
     st.markdown('<div class="section-title">Preview Data (500 baris pertama)</div>',
                 unsafe_allow_html=True)
-    st.dataframe(df_f.head(500), use_container_width=True)
+    st.dataframe(df_f.head(500), width="stretch")
 
     st.markdown('<div class="section-title">Statistik Deskriptif</div>', unsafe_allow_html=True)
     st.dataframe(df_f[['Amount', 'amount_log', 'Month', 'Day']].describe().round(2),
-                 use_container_width=True)
+                 width="stretch")
