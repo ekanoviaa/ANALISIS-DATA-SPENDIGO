@@ -102,23 +102,17 @@ with tab1:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="section-title">Struktur Data & Cek Kualitas</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Struktur Data</div>', unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Baris",    f"{len(df):,}")
     col2.metric("Jumlah Kolom",   f"{len(df.columns)}")
     col3.metric("Jumlah User",    f"{df['User_ID'].nunique()}")
     col4.metric("Missing Values", f"{df.isnull().sum().sum()}")
 
-    col_a, col_b = st.columns(2)
-    with col_a:
-        st.markdown("**Tipe Data per Kolom**")
-        dtype_df = pd.DataFrame({'Kolom': df.dtypes.index, 'Tipe': df.dtypes.values.astype(str)})
-        st.dataframe(dtype_df, use_container_width=True, hide_index=True)
-    with col_b:
-        st.markdown("**Distribusi User Type**")
-        ut_count = df['User_Type'].value_counts().reset_index()
-        ut_count.columns = ['User Type', 'Jumlah Transaksi']
-        st.dataframe(ut_count, use_container_width=True, hide_index=True)
+    st.markdown("**Distribusi User Type**")
+    ut_count = df['User_Type'].value_counts().reset_index()
+    ut_count.columns = ['User Type', 'Jumlah Transaksi']
+    st.dataframe(ut_count, use_container_width=True, hide_index=True)
 
     st.markdown('<div class="section-title">Total Income vs Expense</div>', unsafe_allow_html=True)
     summary = df.groupby('Type')['Amount'].sum()
