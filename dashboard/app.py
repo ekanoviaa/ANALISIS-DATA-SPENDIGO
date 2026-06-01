@@ -50,25 +50,6 @@ def load_data():
 
 df = load_data()
 
-# ── SIDEBAR ───────────────────────────────────────────────────
-st.sidebar.markdown("## 💸 SPENDIGO")
-st.sidebar.markdown("---")
-st.sidebar.markdown("### Filter Data")
-user_types = st.sidebar.multiselect(
-    "User Type", sorted(df['User_Type'].unique()), default=sorted(df['User_Type'].unique()))
-years = st.sidebar.multiselect(
-    "Tahun", sorted(df['Year'].unique()), default=sorted(df['Year'].unique()))
-tipe_tx = st.sidebar.radio("Tipe Transaksi", ["Semua", "Income", "Expense"], index=0)
-st.sidebar.markdown("---")
-st.sidebar.caption("Coding Camp 2026 — Data Science Project")
-
-df_f = df[df['User_Type'].isin(user_types) & df['Year'].isin(years)]
-if tipe_tx != "Semua":
-    df_f = df_f[df_f['Type'] == tipe_tx]
-df_exp = df_f[df_f['Type'] == 'Expense'].copy()
-df_inc = df_f[df_f['Type'] == 'Income'].copy()
-expense_only = df[df['Type'] == 'Expense'].copy()
-
 # ── HEADER ────────────────────────────────────────────────────
 st.title("💸 SPENDIGO — Analisis Keuangan Mahasiswa Gen-Z")
 st.caption(
@@ -495,48 +476,7 @@ with tab4:
             st.markdown("**Feature Importance (detail):**")
             fi_df = pd.DataFrame({'Fitur': feat_imp.index, 'Importance': feat_imp.values.round(4)})
             st.dataframe(fi_df, use_container_width=True, hide_index=True)
-
-        st.markdown("---")
-        st.markdown("#### 🔮 Prediksi Kategori Transaksi Baru")
-        cp1, cp2 = st.columns(2)
-        with cp1:
-            p_amount   = st.number_input("Amount (Rp)", min_value=1000, max_value=10000000, value=50000, step=5000)
-            p_type     = st.selectbox("Tipe Transaksi", ["Expense", "Income"])
-            p_usertype = st.selectbox("User Type", sorted(df['User_Type'].unique()))
-        with cp2:
-            p_month   = st.slider("Bulan", 1, 12, 3)
-            p_day     = st.slider("Tanggal", 1, 31, 15)
-            p_weekday = st.slider("Hari (0=Senin, 6=Minggu)", 0, 6, 1)
-
-        if st.button("🔍 Prediksi Kategori"):
-            try:
-                ut_enc  = le_user.transform([p_usertype])[0]
-                is_inc  = 1 if p_type == 'Income' else 0
-                is_wkd  = 1 if p_weekday < 5 else 0
-                is_ram  = 1 if p_month in [3, 4] else 0
-                is_harb = 1 if (p_month == 11 and p_day == 11) or (p_month == 12 and p_day == 12) else 0
-                X_new = pd.DataFrame([{
-                    'Amount': p_amount, 'amount_log': np.log1p(p_amount),
-                    'is_income': is_inc, 'Month': p_month, 'Day': p_day,
-                    'day_of_week': p_weekday, 'is_weekday': is_wkd,
-                    'is_ramadan': is_ram, 'is_harbolnas': is_harb, 'User_Type_enc': ut_enc
-                }])
-                pred_cat  = rf_model.predict(X_new)[0]
-                pred_prob = rf_model.predict_proba(X_new)[0]
-                st.success(f"✅ Prediksi Kategori: **{pred_cat}** (confidence: {pred_prob.max()*100:.1f}%)")
-                prob_df = pd.DataFrame({'Kategori': rf_model.classes_, 'Probabilitas': pred_prob * 100
-                                        }).sort_values('Probabilitas', ascending=True).tail(6)
-                fig_pr, ax_pr = plt.subplots(figsize=(7, 3))
-                ax_pr.barh(prob_df['Kategori'], prob_df['Probabilitas'], color='#7F77DD', edgecolor='white')
-                ax_pr.set_xlabel('Probabilitas (%)'); ax_pr.set_title('Distribusi Probabilitas Prediksi')
-                for bar, val in zip(ax_pr.patches, prob_df['Probabilitas']):
-                    ax_pr.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height()/2,
-                               f'{val:.1f}%', va='center', fontsize=9)
-                plt.tight_layout(); st.pyplot(fig_pr); plt.close()
-            except Exception as e:
-                st.error(f"Error prediksi: {e}")
-
-
+        
 # ══════════════════════════════════════════════════════════════
 # TAB 5 — LSTM
 # ══════════════════════════════════════════════════════════════
