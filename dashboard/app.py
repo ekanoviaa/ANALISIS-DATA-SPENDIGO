@@ -30,7 +30,9 @@ st.markdown("""
 # ── LOAD & FEATURE ENGINEERING ───────────────────────────────
 @st.cache_data
 def load_data():
-    df = pd.read_csv('genz_financial_dataset_v3.csv')
+    import os
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(os.path.join(BASE_DIR, 'genz_financial_dataset_v3.csv'))
     df['Date']         = pd.to_datetime(df['Date'])
     df['Year']         = df['Date'].dt.year
     df['Month']        = df['Date'].dt.month
