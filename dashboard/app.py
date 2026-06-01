@@ -404,6 +404,7 @@ with tab3:
 # TAB 4 — MODEL RF
 # ══════════════════════════════════════════════════════════════
 with tab4:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     st.markdown('<div class="section-title">Model Random Forest — Auto-Kategorisasi Transaksi</div>',
                 unsafe_allow_html=True)
     st.markdown("""
