@@ -49,6 +49,10 @@ def load_data():
     return df
 
 df = load_data()
+df_f = df.copy()
+df_exp = df_f[df_f['Type'] == 'Expense'].copy()
+df_inc = df_f[df_f['Type'] == 'Income'].copy()
+expense_only = df[df['Type'] == 'Expense'].copy()
 
 # ── HEADER ────────────────────────────────────────────────────
 st.title("💸 SPENDIGO — Analisis Keuangan Mahasiswa Gen-Z")
@@ -264,9 +268,6 @@ with tab2:
 # TAB 3 — A/B TESTING
 # ══════════════════════════════════════════════════════════════
 with tab3:
-    st.markdown('<div class="section-title">A/B Testing — Uji Statistik untuk BQ3</div>', unsafe_allow_html=True)
-    st.info("Semua uji menggunakan seluruh dataset (tidak terpengaruh filter sidebar).")
-
     # ── Test 1: Mann-Whitney boros vs hemat ──────────────────
     st.markdown("#### Test 1 — Mann-Whitney U: Pengeluaran 'boros' vs 'hemat'")
     st.markdown("""
