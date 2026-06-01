@@ -416,10 +416,10 @@ with tab4:
     """, unsafe_allow_html=True)
 
     model_loaded = False
-    if os.path.exists('rf_model.pkl') and os.path.exists('le_user_type.pkl'):
+    if os.path.exists(os.path.join(BASE_DIR, 'rf_model.pkl')) and os.path.exists(os.path.join(BASE_DIR, 'le_user_type.pkl')):
         try:
-            rf_model = joblib.load('rf_model.pkl')
-            le_user  = joblib.load('le_user_type.pkl')
+            rf_model = joblib.load(os.path.join(BASE_DIR, 'rf_model.pkl'))
+            le_user  = joblib.load(os.path.join(BASE_DIR, 'le_user_type.pkl'))
             model_loaded = True
             st.success("✅ Model RF berhasil dimuat dari rf_model.pkl")
         except Exception as e:
@@ -447,7 +447,7 @@ with tab4:
                 rf.fit(X_tr, y_tr)
                 y_pred = rf.predict(X_te)
                 acc = accuracy_score(y_te, y_pred)
-            joblib.dump(rf, 'rf_model.pkl'); joblib.dump(le_ut, 'le_user_type.pkl')
+            joblib.dump(rf, os.path.join(BASE_DIR, 'rf_model.pkl')); joblib.dump(le_ut, os.path.join(BASE_DIR, 'le_user_type.pkl'))
             st.success(f"✅ Model dilatih! Accuracy: {acc*100:.2f}%")
             st.text(classification_report(y_te, y_pred))
             st.rerun()
