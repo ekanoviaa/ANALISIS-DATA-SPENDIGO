@@ -1,5 +1,5 @@
 # 💸 SPENDIGO 
-Analisis Keuangan Mahasiswa Gen-Z | Coding Camp 2026
+Website Manajemen Keuangan Pribadi untuk Gen Z | Coding Camp 2026
 
 ## 🔗 Live Dashboard
 (https://spendigo.streamlit.app)
