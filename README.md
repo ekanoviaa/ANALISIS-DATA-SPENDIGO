@@ -1,10 +1,12 @@
-# 💸 SPENDIGO 
- Analisis Keuangan Gen-Z | Coding Camp 2026
+# 💸 SPENDIGO — Analisis Keuangan Mahasiswa Gen-Z
+Proyek Data Science End-to-End | Coding Camp 2026
 
 ## 🔗 Live Dashboard
 (https://spendigo.streamlit.app)
 
-## 📁 Struktur Repo
+## 📁 Struktur Repository
+
+```text
 ANALISIS-DATA-SPENDIGO/
 ├── dashboard/
 │   ├── app.py                        # Streamlit dashboard utama
@@ -17,13 +19,14 @@ ANALISIS-DATA-SPENDIGO/
 │   ├── CapstoneSpendigo.ipynb        # Notebook analisis lengkap
 │   └── genz_financial_dataset_v3.csv # Dataset
 │
-└── .gitattributes
 └── README.md
+```
 
 ## 🛠️ Tech Stack
 Python · Pandas · NumPy · Scikit-learn · TensorFlow · SciPy · Matplotlib · Seaborn · Streamlit
 
 ## ⚙️ Cara Menjalankan Lokal
+
 ```bash
 cd dashboard
 pip install -r requirements.txt
