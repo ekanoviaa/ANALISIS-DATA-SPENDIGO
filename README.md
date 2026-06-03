@@ -14,11 +14,9 @@ ANALISIS-DATA-SPENDIGO/
 │   ├── genz_financial_dataset_v3.csv # Dataset hasil feature engineering
 │   ├── rf_model.pkl                  # Model Random Forest terlatih
 │   └── le_user_type.pkl              # Label Encoder User Type
-│
 ├── notebook/
 │   ├── CapstoneSpendigo.ipynb        # Notebook analisis lengkap
 │   └── genz_financial_dataset_v3.csv # Dataset
-│
 └── .gitattributes
 └── README.md
 ```
