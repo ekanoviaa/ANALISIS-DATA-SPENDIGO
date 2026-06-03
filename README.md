@@ -1,5 +1,5 @@
-# 💸 SPENDIGO — Analisis Keuangan Mahasiswa Gen-Z
-Proyek Data Science End-to-End | Coding Camp 2026
+# 💸 SPENDIGO 
+Analisis Keuangan Mahasiswa Gen-Z | Coding Camp 2026
 
 ## 🔗 Live Dashboard
 (https://spendigo.streamlit.app)
@@ -19,6 +19,7 @@ ANALISIS-DATA-SPENDIGO/
 │   ├── CapstoneSpendigo.ipynb        # Notebook analisis lengkap
 │   └── genz_financial_dataset_v3.csv # Dataset
 │
+└── .gitattributes
 └── README.md
 ```
 
