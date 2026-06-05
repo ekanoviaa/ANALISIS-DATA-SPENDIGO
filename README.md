@@ -1,5 +1,8 @@
-# 💸 SPENDIGO 
-Website Manajemen Keuangan Pribadi untuk Gen Z | Coding Camp 2026
+# SpendiGo
+
+Personal Finance Web App untuk Gen Z Indonesia.
+
+**Tagline:** Kelola keuanganmu, pahami polamu
 
 ## 🔗 Live Dashboard
 (https://spendigo.streamlit.app)
